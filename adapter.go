@@ -29,21 +29,20 @@ type adapter struct {
 }
 
 // NewAdapter is the constructor for Adapter. You need to provide a qmgo.Collection which is already defined.
+//
 // Example:
-//
-// 		client, _ := qmgo.NewClient(context.Background(), &qmgo.Config{
-// 			Uri:              	"mongodb://127.0.0.1:27017/?authSource=admin&replicaSet=rs0",
-// 			ConnectTimeoutMS:=	time.Second * 30,
-// 			MaxPoolSize:      	100,
-// 			Auth: 				qmgo.Credential{
-// 				AuthSource: "admin",
-// 				Username:   "root",
-// 				Password:   "rootroot",
-// 			},
-// 		})
-// 		coll := c.Database("Dbname").Collection("CasbinName")
-// 		a, err := casbinqmgoadapter.NewAdapter(coll)
-//
+// client, _ := qmgo.NewClient(context.Background(), &qmgo.Config{
+// 	Uri:              	"mongodb://127.0.0.1:27017/?authSource=admin&replicaSet=rs0",
+// 	ConnectTimeoutMS:=	time.Second * 30,
+// 	MaxPoolSize:      	100,
+// 	Auth: 				qmgo.Credential{
+// 		AuthSource: "admin",
+// 		Username:   "root",
+// 		Password:   "rootroot",
+// 	},
+// })
+// coll := c.Database("Dbname").Collection("CasbinName")
+// a, err := casbinqmgoadapter.NewAdapter(coll)
 func NewAdapter(coll *qmgo.Collection) persist.Adapter {
 	a := &adapter{
 		collection: coll,
