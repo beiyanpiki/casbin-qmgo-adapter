@@ -15,8 +15,7 @@ package main
 import (
 	"context"
 
-	"casbinqmgoadapter"
-
+	qmgoadapter "github.com/beiyanpiki/casbin-qmgo-adapter"
 	"github.com/casbin/casbin/v2"
 	"github.com/qiniu/qmgo"
 )
@@ -29,7 +28,7 @@ func main() {
 	}
 	coll := c.Database("Casbin").Collection("Casbin")
 	// Initialize a Qmgo adapter and use it in a Casbin enforcer.
-	a := casbinqmgoadapter.NewAdapter(coll)
+	a := qmgoadapter.NewAdapter(coll)
 
 	e, err := casbin.NewEnforcer("examples/rbac_model.conf", a)
 	if err != nil {

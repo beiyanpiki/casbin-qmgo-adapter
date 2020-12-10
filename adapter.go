@@ -1,4 +1,4 @@
-package casbinqmgoadapter
+package qmgoadapter
 
 import (
 	"context"

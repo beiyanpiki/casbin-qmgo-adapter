@@ -15,11 +15,11 @@
 package casbinqmgoadapter_test
 
 import (
-	"casbinqmgoadapter"
 	"context"
 	"os"
 	"testing"
 
+	qmgoadapter "github.com/beiyanpiki/casbin-qmgo-adapter"
 	"github.com/casbin/casbin/v2"
 	"github.com/casbin/casbin/v2/util"
 	"github.com/qiniu/qmgo"
@@ -58,7 +58,7 @@ func initPolicy(t *testing.T) {
 		panic(err)
 	}
 
-	a := casbinqmgoadapter.NewAdapter(getDb())
+	a := qmgoadapter.NewAdapter(getDb())
 	// This is a trick to save the current policy to the DB.
 	// We can't call e.SavePolicy() because the adapter in the enforcer is still the file adapter.
 	// The current policy means the policy in the Casbin enforcer (aka in memory).
@@ -88,7 +88,7 @@ func TestAdapter(t *testing.T) {
 	// Now the DB has policy, so we can provide a normal use case.
 	// Create an adapter and an enforcer.
 	// NewEnforcer() will load the policy automatically.
-	a := casbinqmgoadapter.NewAdapter(getDb())
+	a := qmgoadapter.NewAdapter(getDb())
 
 	e, err := casbin.NewEnforcer("examples/rbac_model.conf", a)
 	if err != nil {
@@ -154,7 +154,7 @@ func TestAdapter(t *testing.T) {
 	testGetPolicy(t, e, [][]string{})
 }
 func TestDeleteFilteredAdapter(t *testing.T) {
-	a := casbinqmgoadapter.NewAdapter(getDb())
+	a := qmgoadapter.NewAdapter(getDb())
 
 	e, err := casbin.NewEnforcer("examples/rbac_tenant_service.conf", a)
 	if err != nil {
@@ -189,7 +189,7 @@ func TestFilteredAdapter(t *testing.T) {
 	// Now the DB has policy, so we can provide a normal use case.
 	// Create an adapter and an enforcer.
 	// NewEnforcer() will load the policy automatically.
-	a := casbinqmgoadapter.NewAdapter(getDb())
+	a := qmgoadapter.NewAdapter(getDb())
 
 	e, err := casbin.NewEnforcer("examples/rbac_model.conf", a)
 	if err != nil {
